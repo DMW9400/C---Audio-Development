@@ -10,10 +10,6 @@
 #define FRAMES_PER_BUFFER 256
 #define CHANNELS 1
 
-int main(int argc, char *argv[]){
-    printf("Hello, World!\n");
-    return 0;
-}
 typedef struct {
     SNDFILE *file;
     SF_INFO sfinfo;
@@ -26,15 +22,44 @@ static int recordCallback(const void *input, void *output,
                           void *userData) {
                             
     AudioData *audioData = (AudioData*)userData;
-    const short *in = (const short*)input;
-    const short *out = (const short*)output;
+    short *in = ( short*)input;
+    // short *out = (short*)output;
 
-
-    // Write the input audio data to the file
     if (sf_writef_short(audioData->file, in, frameCount) != frameCount) {
         printf("Error writing to file\n");
-        return paComplete;  // End the stream on error
+        return paComplete;  
     }
 
-    return paContinue;  // Continue processing audio
+    // looks like this should actually go in playCallBack
+
+    return paContinue;
+}
+
+
+static int playCallBack(const void *input, void *output,
+                        unsigned long frameCount,
+                        const PaStreamCallbackTimeInfo *timeInfo,
+                        PaStreamCallbackFlags statusFlags,
+                        void *userData) {
+    AudioData *audioData = (AudioData*)userData;
+    short *in = ( short*)input;
+    short *out = (short*)output;
+
+    for (int i = 0; i < frameCount - 1 ; i++) {
+        out[i] = in[i];
+    }
+    if (sf_readf_short(audioData->file, out, frameCount) != frameCount) {
+        printf("Error reading from file\n");
+        return paComplete;
+    }
+
+    return paContinue;
+}
+
+int main(int argc, char *argv[]){
+    // initscr();
+    // noecho();
+    // getch();
+    // endwin();
+    return 0;
 }
