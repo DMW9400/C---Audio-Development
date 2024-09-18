@@ -14,28 +14,21 @@ int main(int argc, char *argv[]){
     printf("Hello, World!\n");
     return 0;
 }
-
-
 typedef struct {
     SNDFILE *file;
     SF_INFO sfinfo;
 } AudioData;
-
-
-// static int recordCallback(const void *input, void *output, unsigned long frameCount,    const PaStreamCallbackTimeInfo *timeInfo,
-// PaStreamCallbackFlags statusFlags, void *userData) {
-//     // count = sf_writef_float (sndfile, obuf, num_output_frames);
-
-// }
-
 
 static int recordCallback(const void *input, void *output,
                           unsigned long frameCount,
                           const PaStreamCallbackTimeInfo *timeInfo,
                           PaStreamCallbackFlags statusFlags,
                           void *userData) {
+                            
     AudioData *audioData = (AudioData*)userData;
     const short *in = (const short*)input;
+    const short *out = (const short*)output;
+
 
     // Write the input audio data to the file
     if (sf_writef_short(audioData->file, in, frameCount) != frameCount) {
