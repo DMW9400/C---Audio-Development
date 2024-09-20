@@ -24,7 +24,7 @@ static int recordCallback(const void *input, void *output,
                             
     AudioData *audioData = (AudioData*)userData;
     short *in = ( short*)input;
-    // short *out = (short*)output;
+    short *out = (short*)output;
 
     if (sf_writef_short(audioData->file, in, frameCount) != frameCount) {
         printf("Error writing to file\n");
@@ -42,7 +42,7 @@ static int playCallBack(const void *input, void *output,
     AudioData *audioData = (AudioData*)userData;
     short *in = ( short*)input;
     short *out = (short*)output;
-
+    // printf("playing callback");
     for (int i = 0; i < frameCount - 1 ; i++) {
         out[i] = in[i];
     }
