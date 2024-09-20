@@ -60,32 +60,6 @@ void print_device_info(const PaDeviceInfo *deviceInfo) {
     printf("Max Output Channels: %d\n", deviceInfo->maxOutputChannels);
 }
 
-// int main(int argc, char *argv[]){
-//     PaError err;
-//     PaStream *stream;
-//     AudioData audioData;
-//     memset(&audioData.sfinfo, 0, sizeof(SF_INFO));
-//     audioData.sfinfo.samplerate = SAMPLE_RATE;
-//     audioData.sfinfo.channels = CHANNELS;
-//     audioData.sfinfo.format = SF_FORMAT_WAV | SF_FORMAT_PCM_16;
-//     if (!audioData.file) {
-//             printf("Error opening file for recording: %s\n", sf_strerror(NULL));
-//             return 1;
-//         } else {
-//         // Playback mode: open the file for reading
-//         audioData.file = sf_open(argv[2], SFM_READ, &audioData.sfinfo);
-//         if (!audioData.file) {
-//             printf("Error opening file for playback: %s\n", sf_strerror(NULL));
-//             return 1;
-//         }
-//     }
-    
-//     // initscr();
-//     // noecho();
-//     // getch();
-//     // endwin();
-//     return 0;
-// }
 
 int main(int argc, char *argv[]) {
     if (argc < 3) {
