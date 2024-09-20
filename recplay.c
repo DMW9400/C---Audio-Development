@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 // #include <portaudio.h>
+// #include <sndfile.h>
 #include "/opt/homebrew/Cellar/portaudio/19.7.0/include/portaudio.h"
 #include "/opt/homebrew/Cellar/libsndfile/1.2.2/include/sndfile.h"
 #include <ncurses.h>
@@ -53,6 +54,12 @@ static int playCallBack(const void *input, void *output,
     return paContinue;
 }
 
+void print_device_info(const PaDeviceInfo *deviceInfo) {
+    printf("Device Name: %s\n", deviceInfo->name);
+    printf("Max Input Channels: %d\n", deviceInfo->maxInputChannels);
+    printf("Max Output Channels: %d\n", deviceInfo->maxOutputChannels);
+}
+
 int main(int argc, char *argv[]){
     PaError err;
     PaStream *stream;
@@ -61,6 +68,17 @@ int main(int argc, char *argv[]){
     audioData.sfinfo.samplerate = SAMPLE_RATE;
     audioData.sfinfo.channels = CHANNELS;
     audioData.sfinfo.format = SF_FORMAT_WAV | SF_FORMAT_PCM_16;
+    if (!audioData.file) {
+            printf("Error opening file for recording: %s\n", sf_strerror(NULL));
+            return 1;
+        } else {
+        // Playback mode: open the file for reading
+        audioData.file = sf_open(argv[2], SFM_READ, &audioData.sfinfo);
+        if (!audioData.file) {
+            printf("Error opening file for playback: %s\n", sf_strerror(NULL));
+            return 1;
+        }
+    }
     
     // initscr();
     // noecho();
