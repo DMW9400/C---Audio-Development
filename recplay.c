@@ -29,9 +29,6 @@ static int recordCallback(const void *input, void *output,
         printf("Error writing to file\n");
         return paComplete;  
     }
-
-    // looks like this should actually go in playCallBack
-
     return paContinue;
 }
 
@@ -57,6 +54,14 @@ static int playCallBack(const void *input, void *output,
 }
 
 int main(int argc, char *argv[]){
+    PaError err;
+    PaStream *stream;
+    AudioData audioData;
+    memset(&audioData.sfinfo, 0, sizeof(SF_INFO));
+    audioData.sfinfo.samplerate = SAMPLE_RATE;
+    audioData.sfinfo.channels = CHANNELS;
+    audioData.sfinfo.format = SF_FORMAT_WAV | SF_FORMAT_PCM_16;
+    
     // initscr();
     // noecho();
     // getch();
