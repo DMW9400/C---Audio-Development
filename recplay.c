@@ -33,27 +33,6 @@ static int recordCallback(const void *input, void *output,
     return paContinue;
 }
 
-
-// static int playCallBack(const void *input, void *output,
-//                         unsigned long frameCount,
-//                         const PaStreamCallbackTimeInfo *timeInfo,
-//                         PaStreamCallbackFlags statusFlags,
-//                         void *userData) {
-//     AudioData *audioData = (AudioData*)userData;
-//     short *in = ( short*)input;
-//     short *out = (short*)output;
-//     // printf("playing callback");
-//     for (int i = 0; i < frameCount - 1 ; i++) {
-//         out[i] = in[i];
-//     }
-//     if (sf_readf_short(audioData->file, out, frameCount) != frameCount) {
-//         printf("Error reading from file\n");
-//         return paComplete;
-//     }
-
-//     return paContinue;
-// }
-
 static int playCallBack(const void *input, void *output,
                         unsigned long frameCount,
                         const PaStreamCallbackTimeInfo *timeInfo,
