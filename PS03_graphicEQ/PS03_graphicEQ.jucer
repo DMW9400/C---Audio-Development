@@ -4,6 +4,8 @@
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1">
   <MAINGROUP id="mvEkBA" name="PS03_graphicEQ">
     <GROUP id="{E0AFA04D-94CC-0678-86FD-E7E444A5E3A1}" name="Source">
+      <FILE id="W4aWFk" name="EQBand.cpp" compile="1" resource="0" file="Source/EQBand.cpp"/>
+      <FILE id="S1Omi1" name="EQBand.h" compile="0" resource="0" file="Source/EQBand.h"/>
       <FILE id="P29dD8" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="I4sEio" name="PluginProcessor.h" compile="0" resource="0"
