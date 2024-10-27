@@ -23,7 +23,8 @@ public:
 private:
     std::vector<juce::IIRFilter> filter;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> gainAttachment;
-    int numChannels, sampleRate;
+    size_t numChannels;
+    int sampleRate;
     float frequency, gain;
     juce::Slider bandSlider;
     juce::Label bandLabel;
